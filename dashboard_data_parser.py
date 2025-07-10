@@ -42,12 +42,9 @@ def parse_cmd_audits_log(cmd_audits_log_file):
 
     return df
 
-# Parser for HTTP honeypot log (http_audit.log), returning IP / username / password
+# Parser for HTTP honeypot log, returning IP / username / password
 def parse_http_audits_log(http_audits_log_file):
     data = []
-    # Our log lines look like:
-    # 2025-07-08 12:00:00 Client with IP Address: 1.2.3.4 entered
-    #  Username: attacker, Password: guessme
     pattern = re.compile(
         r"Client with IP Address:\s*(?P<ip>[\d\.]+)\s*entered\s*"
         r"Username:\s*(?P<username>[^,]+),\s*Password:\s*(?P<password>.+)"

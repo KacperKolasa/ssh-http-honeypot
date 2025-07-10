@@ -5,14 +5,14 @@ import paramiko
 import threading
 import socket
 import time
-from pathlib import Path
+from pathlib import Path 
 
 # Constants
-SSH_BANNER = "SSH-2.0-MySSHServer_1.0"
-base_dir = base_dir = Path(__file__).parent.parent
-server_key = base_dir / 'ssh_honeypy' / 'static' / 'server.key'
-creds_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'creds_audits.log'
-cmd_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'cmd_audits.log'
+SSH_BANNER = "SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.9"
+base_dir = Path(__file__).parent.parent
+server_key = base_dir / 'honeypot' / 'static' / 'server.key'
+creds_audits_log_local_file_path = base_dir / 'honeypot' / 'log_files' / 'creds_audits.log'
+cmd_audits_log_local_file_path = base_dir / 'honeypot' / 'log_files' / 'cmd_audits.log'
 
 # SSH Server Host Key
 host_key = paramiko.RSAKey(filename=server_key)
@@ -20,12 +20,12 @@ host_key = paramiko.RSAKey(filename=server_key)
 # Logging Format
 logging_format = logging.Formatter('%(message)s')
 
-# Funnel Logger
-funnel_logger = logging.getLogger('FunnelLogger')
-funnel_logger.setLevel(logging.INFO)
-funnel_handler = RotatingFileHandler(cmd_audits_log_local_file_path, maxBytes=2000, backupCount=5)
-funnel_handler.setFormatter(logging_format)
-funnel_logger.addHandler(funnel_handler)
+# event Logger
+event_logger = logging.getLogger('EventLogger')
+event_logger.setLevel(logging.INFO)
+event_handler = RotatingFileHandler(cmd_audits_log_local_file_path, maxBytes=2000, backupCount=5)
+event_handler.setFormatter(logging_format)
+event_logger.addHandler(event_handler)
 
 # Credentials Logger: Captures IP Address, Username, Password.
 creds_logger = logging.getLogger('CredsLogger')
@@ -52,7 +52,7 @@ class Server(paramiko.ServerInterface):
         return "password"
 
     def check_auth_password(self, username, password):
-        funnel_logger.info(f'Client {self.client_ip} attempted connection with ' + f'username: {username}, ' + f'password: {password}')
+        event_logger.info(f'Client {self.client_ip} attempted connection with ' + f'username: {username}, ' + f'password: {password}')
         creds_logger.info(f'{self.client_ip}, {username}, {password}')
         if self.input_username is not None and self.input_password is not None:
             if username == self.input_username and password == self.input_password:
@@ -98,7 +98,7 @@ def emulated_shell(channel, client_ip):
             # ENTER pressed? process the line
             if char == b'\r':
                 line = command.strip(b"\r\n")
-                funnel_logger.info(f'Command {line.decode()} executed by {client_ip}')
+                event_logger.info(f'Command {line.decode()} executed by {client_ip}')
 
                 # built-ins
                 if line == b'exit':

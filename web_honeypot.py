@@ -9,16 +9,16 @@ from pathlib import Path
 logging_format = logging.Formatter('%(asctime)s %(message)s')
 
 base_dir = base_dir = Path(__file__).parent.parent
-http_audits_log_local_file_path = base_dir / 'ssh_honeypy' / 'log_files' / 'http_audit.log'
+http_audits_log_local_file_path = base_dir / 'honeypot' / 'log_files' / 'http_audit.log'
 
 # HTTP Logger
-funnel_logger = logging.getLogger('HTTPLogger')
-funnel_logger.setLevel(logging.INFO)
-funnel_handler = RotatingFileHandler(http_audits_log_local_file_path, maxBytes=2000, backupCount=5)
-funnel_handler.setFormatter(logging_format)
-funnel_logger.addHandler(funnel_handler)
+event_logger = logging.getLogger('HTTPLogger')
+event_logger.setLevel(logging.INFO)
+event_handler = RotatingFileHandler(http_audits_log_local_file_path, maxBytes=2000, backupCount=5)
+event_handler.setFormatter(logging_format)
+event_logger.addHandler(event_handler)
 
-def baseline_web_honeypot(input_username="admin", input_password="deeboodah"):
+def baseline_web_honeypot(input_username="admin", input_password="veryhardpassword"):
 
     app = Flask(__name__)
 
@@ -35,16 +35,16 @@ def baseline_web_honeypot(input_username="admin", input_password="deeboodah"):
 
         ip_address = request.remote_addr
 
-        funnel_logger.info(f'Client with IP Address: {ip_address} entered\n Username: {username}, Password: {password}')
+        event_logger.info(f'Client with IP Address: {ip_address} entered\n Username: {username}, Password: {password}')
 
         if username == input_username and password == input_password:
-            return 'Please go to https://r.mtdv.me/gYVb1JYxGw'
+            return 'SUCCESFULLY LOGGED IN!'
         else:
             return "Invalid username or password, please try again."
         
     return app
 
-def run_app(port=5000, input_username="admin", input_password="deeboodah"):
+def run_app(port=5000, input_username="admin", input_password="veryhardpassword"):
      app = baseline_web_honeypot(input_username, input_password)
      app.run(debug=True, port=port, host="0.0.0.0")
 

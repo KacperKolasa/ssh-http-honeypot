@@ -1,0 +1,16 @@
+Client 127.0.0.1 attempted connection with username: test, password: test
+Command hello executed by 127.0.0.1
+Command pwd executed by 127.0.0.1
+Command ls executed by 127.0.0.1
+Command whoami executed by 127.0.0.1
+Command exit executed by 127.0.0.1
+Client 127.0.0.1 attempted connection with username: test, password: admin
+Command ls executed by 127.0.0.1
+Command ls -la executed by 127.0.0.1
+Command eexit executed by 127.0.0.1
+Command exit executed by 127.0.0.1
+Client 127.0.0.1 attempted connection with username: admin, password: admin
+Command exit executed by 127.0.0.1
+Command exit executed by 127.0.0.1
+Client 127.0.0.1 attempted connection with username: user, password: test
+Command exit executed by 127.0.0.1

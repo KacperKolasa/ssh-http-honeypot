@@ -1,0 +1,4 @@
+127.0.0.1, test, test
+127.0.0.1, test, admin
+127.0.0.1, admin, admin
+127.0.0.1, user, test

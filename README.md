@@ -5,7 +5,28 @@ It captures incoming SSH login attempts (credentials & commands) and HTTP reques
 
 ---
 
-## 1. Quick Local Run
+## Features
+
+**Honeypot:** A lightweight SSH/HTTP server that lures attackers, logs every credential & command, and (optionally) stalls clients with a slow “tarpit” banner.
+###### CLI Flags
+| Flag | Purpose | Example |
+|------|---------|---------|
+| `-s, --ssh`   | start the SSH honeypot   | `-s` |
+| `-wh, --http` | start the HTTP honeypot  | `-wh` |
+| `-a, --address` | bind address            | `-a 0.0.0.0` |
+| `-p, --port`    | bind port               | `-p 22` |
+| `-u, --username`| allowed username *(optional)* | `-u admin` |
+| `-w, --password`| password for `--username`     | `-w S3cr3t` |
+| `-t, --tarpit`  | drip slow banner to waste attacker time | `-t` |
+
+**Dashboard:** A Plotly Dash app that reads the three rotating log files (creds_audits.log, cmd_audits.log, http_audit.log) and turns them into live charts/tables. 
+```
+Usage: python web_app.py
+```
+**Logging:** Each honeypot streams every credential, command, and HTTP login attempt into compact rotating text files under honeypot/log_files/.
+
+## Quick Local Run
+note: here we use the default SSH and HTTP ports for increased traffic, however any ports can be used
 
 1. **Clone and install dependencies**  
    ```bash
@@ -16,7 +37,13 @@ It captures incoming SSH login attempts (credentials & commands) and HTTP reques
    pip install -r requirements.txt
    ```
 
-2. **Start the honeypots**  
+2. **Generate server key**  
+   ```bash
+   mkdir static
+   ssh-keygen -t rsa -b 2048 -f server.key
+   ```
+
+3. **Start the honeypots**  
    In one terminal run the following to start the SSH honeypot:  
    ```bash
    python honeypot.py -a 0.0.0.0 -p 22 -s
@@ -26,7 +53,7 @@ It captures incoming SSH login attempts (credentials & commands) and HTTP reques
    python honeypot.py -a 0.0.0.0 -p 80 -wh
    ```
 
-3. **Launch the dashboard**  
+4. **Launch the dashboard**  
    In another terminal:  
    ```bash
    python web_app.py
@@ -35,7 +62,7 @@ It captures incoming SSH login attempts (credentials & commands) and HTTP reques
 
 ---
 
-## 2. Hosting on a VPS (e.g. Hostinger)
+## Hosting on a VPS (e.g. Hostinger)
 
 1. **Push your code** to the VPS (git clone is recommended).  
 2. **Open firewall ports**  
@@ -60,7 +87,7 @@ It captures incoming SSH login attempts (credentials & commands) and HTTP reques
 
 ---
 
-## 3. Sample Findings (2-day Run)
+## Sample Findings (2-day Run)
 
 Below is a screenshot of the findings over 2 days:
 

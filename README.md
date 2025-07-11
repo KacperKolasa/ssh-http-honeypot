@@ -66,3 +66,6 @@ Below is a screenshot of the findings over 2 days:
 
 ![Dashboard screenshot](assets/images/dashboard.png)
 
+The screenshot only shows SSH honeypot findings as the HTTP honeypot was not attacked during the testing time.
+
+

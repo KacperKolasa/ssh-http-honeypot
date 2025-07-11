@@ -1,16 +1,19 @@
-Client 127.0.0.1 attempted connection with username: test, password: test
-Command hello executed by 127.0.0.1
-Command pwd executed by 127.0.0.1
-Command ls executed by 127.0.0.1
-Command whoami executed by 127.0.0.1
-Command exit executed by 127.0.0.1
-Client 127.0.0.1 attempted connection with username: test, password: admin
-Command ls executed by 127.0.0.1
-Command ls -la executed by 127.0.0.1
-Command eexit executed by 127.0.0.1
-Command exit executed by 127.0.0.1
-Client 127.0.0.1 attempted connection with username: admin, password: admin
-Command exit executed by 127.0.0.1
-Command exit executed by 127.0.0.1
-Client 127.0.0.1 attempted connection with username: user, password: test
-Command exit executed by 127.0.0.1
+Client 116.110.89.75 attempted connection with username: ftpuser, password: asteriskftp
+Client 171.251.28.163 attempted connection with username: root, password: alpine
+Client 171.251.28.163 attempted connection with username: oracle, password: oracle
+Client 171.251.28.163 attempted connection with username: root, password: password
+Client 171.251.28.163 attempted connection with username: rebecca, password: rebecca
+Client 116.110.89.75 attempted connection with username: test, password: q1w2e3
+Client 116.110.89.75 attempted connection with username: root, password: admin123
+Client 171.251.28.163 attempted connection with username: btf, password: 321start
+Client 171.251.28.163 attempted connection with username: root, password: abcdefg
+Client 116.110.89.75 attempted connection with username: admin, password: p@ssw0rd
+Client 171.251.28.163 attempted connection with username: guest1, password: guest1
+Client 116.110.89.75 attempted connection with username: plex, password: plex
+Client 116.110.89.75 attempted connection with username: admin, password: P@ssw0rd
+Client 116.110.89.75 attempted connection with username: admin, password: abc123
+Client 171.251.28.163 attempted connection with username: admin, password: trustix
+Client 171.251.28.163 attempted connection with username: admin, password: 12345678
+Client 171.251.28.163 attempted connection with username: root, password: welc0me
+Client 120.50.119.135 attempted connection with username: root, password: root!@#123
+Client 121.160.82.169 attempted connection with username: root, password: 1a2s3d4
